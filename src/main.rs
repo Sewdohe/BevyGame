@@ -10,6 +10,8 @@ use bevy_game::GamePlugin; // ToDo: Replace bevy_game with your new crate name.
 use std::io::Cursor;
 use winit::window::Icon;
 
+use bevy_ecs_ldtk::prelude::*;
+
 fn main() {
     App::new()
         .insert_resource(ClearColor(Color::linear_rgb(0.4, 0.4, 0.4)))
@@ -17,7 +19,7 @@ fn main() {
             DefaultPlugins
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Bevy game".to_string(), // ToDo
+                        title: "Sewdohe Playground".to_string(), // ToDo
                         // Bind to canvas included in `index.html`
                         canvas: Some("#bevy".to_owned()),
                         fit_canvas_to_parent: true,
@@ -27,12 +29,14 @@ fn main() {
                     }),
                     ..default()
                 })
+                .set(ImagePlugin::default_nearest())
                 .set(AssetPlugin {
                     meta_check: AssetMetaCheck::Never,
                     ..default()
                 }),
         )
         .add_plugins(GamePlugin)
+        .add_plugins(LdtkPlugin)
         .add_systems(Startup, set_window_icon)
         .run();
 }
