@@ -75,6 +75,8 @@ bevy_kira_audio = { version = "0.22.0", features = ["android_shared_stdcxx"] }
 bevy_asset_loader = { version = "0.22" }
 rand = { version = "0.8.3" }
 webbrowser = { version = "1", features = ["hardened"] }
+rapier2d = { version = "0.23.0" }
+bevy_rapier2d = "0.29.0"
 
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.30", default-features = false }

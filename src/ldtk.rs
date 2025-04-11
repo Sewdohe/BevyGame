@@ -2,6 +2,7 @@ pub mod ldtk_loader {
     use bevy::prelude::*;
     use bevy_ecs_ldtk::prelude::*;
 
+    use crate::phys::components::WallBundle;
     use crate::player::player::Player;
     use crate::player::player::PlayerPlugin;
 
@@ -97,10 +98,13 @@ pub mod ldtk_loader {
     impl Plugin for LDTKPlugin {
         fn build(&self, app: &mut App) {
             app
+                .add_plugins(LdtkPlugin)
+                .register_ldtk_int_cell::<WallBundle>(1)
+                .register_ldtk_int_cell::<WallBundle>(2)
                 .add_plugins(PlayerPlugin)
+                .insert_resource(LevelSelection::index(0))
                 .add_systems(Startup, spawn_level)
-                .add_systems(Update, camera_fit_inside_current_level)
-                .insert_resource(LevelSelection::index(0));
+                .add_systems(Update, camera_fit_inside_current_level);
         }
     }
 }

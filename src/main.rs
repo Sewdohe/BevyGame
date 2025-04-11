@@ -10,8 +10,6 @@ use bevy_game::GamePlugin; // ToDo: Replace bevy_game with your new crate name.
 use std::io::Cursor;
 use winit::window::Icon;
 
-use bevy_ecs_ldtk::prelude::*;
-
 fn main() {
     App::new()
         .insert_resource(ClearColor(Color::linear_rgb(0.4, 0.4, 0.4)))
@@ -36,7 +34,6 @@ fn main() {
                 }),
         )
         .add_plugins(GamePlugin)
-        .add_plugins(LdtkPlugin)
         .add_systems(Startup, set_window_icon)
         .run();
 }

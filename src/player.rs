@@ -1,6 +1,7 @@
 pub mod player {
     use bevy::prelude::*;
     use bevy_ecs_ldtk::prelude::*;
+    use bevy_rapier2d::prelude::*;
 
     use crate::actions::Actions;
 
@@ -14,6 +15,8 @@ pub mod player {
         #[sprite_sheet]
         sprite_sheet: Sprite,
         transform: Transform,
+        rigidbody: RigidBody,
+        // collider: Collider,
         player: Player,
     }
 
@@ -36,9 +39,19 @@ pub mod player {
         }
     }
 
+    fn process_player(
+        mut commands: Commands,
+        spawned_players: Query<Entity, Added<Player>>,
+        // assets: Res<AssetServer>,
+    ) {
+        for player in spawned_players.iter() {
+            commands.entity(player).insert(Collider::cuboid(4.0, 4.0));
+        }
+    }
+
     impl Plugin for PlayerPlugin {
         fn build(&self, app: &mut App) {
-            app
+            app.add_systems(Update, process_player)
                 .add_systems(Update, move_player)
                 .register_ldtk_entity::<PlayerBundle>("Player");
         }

@@ -6,6 +6,7 @@ mod ldtk;
 mod loading;
 mod menu;
 mod player;
+mod phys;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
@@ -19,6 +20,8 @@ use bevy::app::App;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
 use ldtk::ldtk_loader::LDTKPlugin;
+// use ldtk::ldtk_loader::LDTKPlugin;
+use phys::PhysicsPlugin;
 
 // This example game uses States to separate logic
 // See https://bevy-cheatbook.github.io/programming/states.html
@@ -44,9 +47,9 @@ impl Plugin for GamePlugin {
                 MenuPlugin,
                 ActionsPlugin,
                 InternalAudioPlugin,
-                // PlayerPlugin,
-            ))
-            .add_plugins(LDTKPlugin);
+                LDTKPlugin,
+                PhysicsPlugin,
+            ));
 
         #[cfg(debug_assertions)]
         {
